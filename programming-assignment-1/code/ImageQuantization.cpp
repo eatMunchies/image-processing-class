@@ -36,7 +36,8 @@ void quantizeImage(ImageType& image, const int factor, ImageType& quantized) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
             image.getPixelVal(i, j, val);
-            quantized.setPixelVal(i, j, (val + factor - 1) / factor);
+            // quantized.setPixelVal(i, j, (int) (val + factor - 1) / factor);
+            quantized.setPixelVal(i, j, (int) val / factor);
         }
     }
 }
