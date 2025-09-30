@@ -31,7 +31,7 @@ void sampleImage(ImageType& image, const int factor, ImageType& sampled) {
 
     int N, M, Q;
     image.getImageInfo(N, M, Q);
-    cout << "got image info loaded" << endl;
+    // cout << "got image info loaded" << endl;
 
     // allocate image info (p for prime)
     int Np, Mp, Qp;
@@ -40,35 +40,35 @@ void sampleImage(ImageType& image, const int factor, ImageType& sampled) {
     Qp = Q; // same bit depth
 
     sampled.setImageInfo(Np, Mp, Qp);
-    cout << "set sampled image" << endl;
+    // cout << "set sampled image" << endl;
 
     // now time to sample!
     int row = 0;
     int val;
-    cout << "starting loop" << endl;
+    // cout << "starting loop" << endl;
     for (int i = 0; i < N; i += factor) { 
         int col = 0;
         for (int j = 0; j < M; j += factor) {
-            cout << "i: " << i << endl;
-            cout << "j: " << j << endl;
-            cout << "row: " << row << endl;
-            cout << "col: " << col << endl;
+            // cout << "i: " << i << endl;
+            // cout << "j: " << j << endl;
+            // cout << "row: " << row << endl;
+            // cout << "col: " << col << endl;
             // basically, we loop over and get each top left spot of the source image and assign it to the next image of the next one
             image.getPixelVal(i, j, val);
-            cout << "got val: " << val << endl;
+            // cout << "got val: " << val << endl;
             sampled.setPixelVal(row, col, val);
             col++;
         }
         row++;
     }
-    cout << "sampled image" << endl;
+    // cout << "sampled image" << endl;
 }
 
 void resampleImage(ImageType& image, const int factor, ImageType& resampled) {
     // get image metrics
     int N, M, Q;
     image.getImageInfo(N, M, Q);
-    cout << "got image info" << endl;
+    // cout << "got image info" << endl;
 
     // allocate new image
     int Np = N * factor;
@@ -76,7 +76,7 @@ void resampleImage(ImageType& image, const int factor, ImageType& resampled) {
     int Qp = Q;
     
     resampled.setImageInfo(Np, Mp, Qp);
-    cout << "set new image size" << endl;
+    // cout << "set new image size" << endl;
     
     int ip;
     int jp;
@@ -90,7 +90,7 @@ void resampleImage(ImageType& image, const int factor, ImageType& resampled) {
             resampled.setPixelVal(i, j, val);
         }
     }
-    cout << "resampled" << endl;
+    // cout << "resampled" << endl;
 }
 
 int main(int argc, char *argv[]) 
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
     strcat(peppersEndPath8, extension);
 
     // logging
-    cout << "Reading file 1: " << lennaPath << endl;
+    // cout << "Reading file 1: " << lennaPath << endl;
 
     // read first file
     int i, j;
@@ -155,91 +155,91 @@ int main(int argc, char *argv[])
     // read image header
     readImageHeader(lennaPath, N, M, Q, type);
 
-    cout << "Read image header" << endl;
+    // cout << "Read image header" << endl;
 
     // allocate image 
     ImageType lenna(N, M, Q);
 
-    cout << "Allocated image space" << endl;
+    // cout << "Allocated image space" << endl;
 
     // read image
     readImage(lennaPath, lenna);
 
-    cout << "Read lenna image" << endl;
+    // cout << "Read lenna image" << endl;
 
     // now we sample...
     ImageType sampled2l(128, 128, Q);
     sampleImage(lenna, 2, sampled2l);
-    cout << "sampled by factor of 2" << endl;
+    // cout << "sampled by factor of 2" << endl;
     ImageType sampled4l(64, 64, Q);
     sampleImage(lenna, 4, sampled4l);
-    cout << "sampled by factor of 4" << endl;
+    // cout << "sampled by factor of 4" << endl;
     ImageType sampled8l(32, 32, Q);
     sampleImage(lenna, 8, sampled8l);
-    cout << "sampled by factor of 8" << endl;
+    // cout << "sampled by factor of 8" << endl;
 
     // now we resample...
     ImageType resampled2l(N, M, Q);
     resampleImage(sampled2l, 2, resampled2l);
-    cout << "resampled by factor of 2" << endl;
+    // cout << "resampled by factor of 2" << endl;
     ImageType resampled4l(N, M, Q);
     resampleImage(sampled4l, 4, resampled4l);
-    cout << "resampled by factor of 4" << endl;
+    // cout << "resampled by factor of 4" << endl;
     ImageType resampled8l(N, M, Q);
     resampleImage(sampled8l, 8, resampled8l);
-    cout << "resampled by factor of 8" << endl;
+    // cout << "resampled by factor of 8" << endl;
 
     // write image
     writeImage(lennaEndPath2, resampled2l);
-    cout << "wrote first image" << endl;
+    // cout << "wrote first image" << endl;
     writeImage(lennaEndPath4, resampled4l);
-    cout << "wrote second image" << endl;
+    // cout << "wrote second image" << endl;
     writeImage(lennaEndPath8, resampled8l);
-    cout << "wrote third image" << endl;
+    // cout << "wrote third image" << endl;
 
-    cout << "Reading second file..." << endl;
+    // cout << "Reading second file..." << endl;
 
     // read second file
     readImageHeader(peppersPath, N, M, Q, type);
-    cout << "read image header" << endl;
+    // cout << "read image header" << endl;
 
     // allocate image
     ImageType peppers(N, M, Q);
-    cout << "allocated peppers image space" << endl;
+    // cout << "allocated peppers image space" << endl;
 
     // read image
     readImage(peppersPath, peppers);
-    cout << "read peppers image" << endl;
+    // cout << "read peppers image" << endl;
 
     // now we sample...
     ImageType sampled2p(128, 128, Q);
     sampleImage(peppers, 2, sampled2p);
-    cout << "sample peppers by 2" << endl;
+    // cout << "sample peppers by 2" << endl;
     ImageType sampled4p(64, 64, Q);
     sampleImage(peppers, 4, sampled4p);
-    cout << "sample peppers by 4" << endl;
+    // cout << "sample peppers by 4" << endl;
     ImageType sampled8p(32, 32, Q);
     sampleImage(peppers, 8, sampled8p);
-    cout << "sample peppers by 8" << endl;
+    // cout << "sample peppers by 8" << endl;
 
     // now we resample...
     ImageType resampled2p(N, M, Q);
     resampleImage(sampled2p, 2, resampled2p);
-    cout << "resampled peppers by 2" << endl;
+    // cout << "resampled peppers by 2" << endl;
     ImageType resampled4p(N, M, Q);
     resampleImage(sampled4p, 4, resampled4p);
-    cout << "resampled peppers by 4" << endl;
+    // cout << "resampled peppers by 4" << endl;
     ImageType resampled8p(N, M, Q);
     resampleImage(sampled8p, 8, resampled8p);
-    cout << "resampled peppers by 8" << endl;
+    // cout << "resampled peppers by 8" << endl;
 
     // write image
     writeImage(peppersEndPath2, resampled2p);
-    cout << "wrote first image" << endl;
+    // cout << "wrote first image" << endl;
     writeImage(peppersEndPath4, resampled4p);
-    cout << "wrote second image" << endl;
+    // cout << "wrote second image" << endl;
     writeImage(peppersEndPath8, resampled8p);
-    cout << "wrote third image" << endl;
+    // cout << "wrote third image" << endl;
 
     return 0;
 }

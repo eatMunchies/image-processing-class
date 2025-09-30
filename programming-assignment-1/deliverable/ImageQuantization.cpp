@@ -46,7 +46,7 @@ void resampleQuantizedImage(ImageType& quantized, const int factor, ImageType& r
     // get image metrics
     int N, M, Q;
     quantized.getImageInfo(N, M, Q);
-    cout << "got image info" << endl;
+    // cout << "got image info" << endl;
 
     // allocate new image
     // int Np = N;
@@ -66,7 +66,7 @@ void resampleQuantizedImage(ImageType& quantized, const int factor, ImageType& r
             refactored.setPixelVal(i, j, val * factor);
         }
     }
-    cout << "resampled" << endl;
+    // cout << "resampled" << endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
     strcat(peppersEndPath128, extension);
 
     // logging
-    cout << "Reading file 1: " << lennaPath << endl;
+    // cout << "Reading file 1: " << lennaPath << endl;
 
     // read first file
     int i, j;
@@ -140,107 +140,107 @@ int main(int argc, char *argv[]) {
     // read image header
     readImageHeader(lennaPath, N, M, Q, type);
 
-    cout << "Read image header" << endl;
+    // cout << "Read image header" << endl;
 
     // allocate image 
     ImageType lenna(N, M, Q);
 
-    cout << "Allocated image space" << endl;
+    // cout << "Allocated image space" << endl;
 
     // read image
     readImage(lennaPath, lenna);
 
-    cout << "Read lenna image" << endl;
+    // cout << "Read lenna image" << endl;
 
     // quantize
     ImageType quantized2l(N, M, 128);
     quantizeImage(lenna, 2, quantized2l);
-    cout << "sample lenna by 2" << endl;
+    // cout << "sample lenna by 2" << endl;
     ImageType quantized8l(N, M, 32);
     quantizeImage(lenna, 8, quantized8l);
-    cout << "sample lenna by 8" << endl;
+    // cout << "sample lenna by 8" << endl;
     ImageType quantized32l(N, M, 8);
     quantizeImage(lenna, 32, quantized32l);
-    cout << "sample lenna by 32" << endl;
+    // cout << "sample lenna by 32" << endl;
     ImageType quantized128l(N, M, 4);
     quantizeImage(lenna, 128, quantized128l);
-    cout << "sample lenna by 128" << endl;
+    // cout << "sample lenna by 128" << endl;
 
     // resample
     ImageType resampled2l(N, M, Q);
     resampleQuantizedImage(quantized2l, 2, resampled2l);
-    cout << "resampled lenna by 2" << endl;
+    // cout << "resampled lenna by 2" << endl;
     ImageType resampled8l(N, M, Q);
     resampleQuantizedImage(quantized8l, 8, resampled8l);
-    cout << "resampled lenna by 8" << endl;
+    // cout << "resampled lenna by 8" << endl;
     ImageType resampled32l(N, M, Q);
     resampleQuantizedImage(quantized32l, 32, resampled32l);
-    cout << "resampled lenna by 32" << endl;
+    // cout << "resampled lenna by 32" << endl;
     ImageType resampled128l(N, M, Q);
     resampleQuantizedImage(quantized128l, 128, resampled128l);
-    cout << "resampled lenna by 128" << endl;
+    // cout << "resampled lenna by 128" << endl;
 
 
     // write
     writeImage(lennaEndPath2, resampled2l);
-    cout << "wrote first image" << endl;
+    // cout << "wrote first image" << endl;
     writeImage(lennaEndPath8, resampled8l);
-    cout << "wrote second image" << endl;
+    // cout << "wrote second image" << endl;
     writeImage(lennaEndPath32, resampled32l);
-    cout << "wrote third image" << endl;
+    // cout << "wrote third image" << endl;
     writeImage(lennaEndPath128, resampled128l);
-    cout << "wrote fourth image" << endl;
+    // cout << "wrote fourth image" << endl;
 
-    cout << "Reading second file..." << endl;
+    // cout << "Reading second file..." << endl;
 
     readImageHeader(peppersPath, N, M, Q, type);
-    cout << "read image header" << endl;
+    // cout << "read image header" << endl;
 
     // allocate image
     ImageType peppers(N, M, Q);
-    cout << "allocated peppers image space" << endl;
+    // cout << "allocated peppers image space" << endl;
 
     // read image
     readImage(peppersPath, peppers);
-    cout << "read peppers image" << endl;
+    // cout << "read peppers image" << endl;
 
     // quantize
     ImageType quantized2p(N, M, 128);
     quantizeImage(peppers, 2, quantized2p);
-    cout << "sample peppers by 2" << endl;
+    // cout << "sample peppers by 2" << endl;
     ImageType quantized8p(N, M, 32);
     quantizeImage(peppers, 8, quantized8p);
-    cout << "sample peppers by 8" << endl;
+    // cout << "sample peppers by 8" << endl;
     ImageType quantized32p(N, M, 8);
     quantizeImage(peppers, 32, quantized32p);
-    cout << "sample peppers by 8" << endl;
+    // cout << "sample peppers by 8" << endl;
     ImageType quantized128p(N, M, 2);
     quantizeImage(peppers, 128, quantized128p);
-    cout << "sample peppers by 128" << endl;
+    // cout << "sample peppers by 128" << endl;
 
     // resample
     ImageType resampled2p(N, M, Q);
     resampleQuantizedImage(quantized2p, 2, resampled2p);
-    cout << "resampled peppers by 2" << endl;
+    // cout << "resampled peppers by 2" << endl;
     ImageType resampled8p(N, M, Q);
     resampleQuantizedImage(quantized8p, 8, resampled8p);
-    cout << "resampled peppers by 8" << endl;
+    // cout << "resampled peppers by 8" << endl;
     ImageType resampled32p(N, M, Q);
     resampleQuantizedImage(quantized32p, 32, resampled32p);
-    cout << "resampled peppers by 32" << endl;
+    // cout << "resampled peppers by 32" << endl;
     ImageType resampled128p(N, M, Q);
     resampleQuantizedImage(quantized128p, 128, resampled128p);
-    cout << "resampled peppers by 128" << endl;
+    // cout << "resampled peppers by 128" << endl;
 
     // write
     writeImage(peppersEndPath2, resampled2p);
-    cout << "wrote first image" << endl;
+    // cout << "wrote first image" << endl;
     writeImage(peppersEndPath8, resampled8p);
-    cout << "wrote second image" << endl;
+    // cout << "wrote second image" << endl;
     writeImage(peppersEndPath32, resampled32p);
-    cout << "wrote third image" << endl;
+    // cout << "wrote third image" << endl;
     writeImage(peppersEndPath128, resampled128p);
-    cout << "wrote fourth image" << endl;
+    // cout << "wrote fourth image" << endl;
 
     return 0;
 }

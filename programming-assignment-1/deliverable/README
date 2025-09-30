@@ -15,4 +15,6 @@ If your build environment is different than mine, you will have to remake the ex
 - run 'make' in the project directory to build the executables
 - run the executables!
 
+NOTE: there will be errors but you can ignore them! (They are related to char* string stuff that doesn't really matter for this context and I'm not too keen on fixing it currently).
+
 Filepaths throughout the project are either hardcoded or initialized algorithmically. Regardless, it defaults to putting everything in the project directory, but adjust the code as needed for your setup. 
