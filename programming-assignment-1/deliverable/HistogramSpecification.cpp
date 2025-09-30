@@ -12,6 +12,7 @@ a program to transform an input image based on the histogram specification metho
 #include "image.h"
 #include <iostream>
 #include <cstring>
+#include <cmath>
 
 using namespace std;
 
