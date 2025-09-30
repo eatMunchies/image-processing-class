@@ -1,0 +1,17 @@
+
+Welcome to my first programming assignment for CS 474, Image Processing. 
+
+This project is structured into four executables, one for each problem of the assignment:
+1. ImageSampling
+2. ImageQuantization
+3. HistogramEqualization
+4. HistogramSpecification
+
+To run the code, simply try running the executable for that problem. 
+
+If your build environment is different than mine, you will have to remake the executables. 
+- make sure you have 'make' installed and you can compile cpp code
+- run 'make' in the project directory to build the executables
+- run the executables!
+
+Filepaths throughout the project are either hardcoded or initialized algorithmically. Regardless, it defaults to putting everything in the project directory, but adjust the code as needed for your setup. 
