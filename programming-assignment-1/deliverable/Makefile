@@ -19,3 +19,7 @@ histogram.o: histogram.h histogram.cpp
 	g++ -c $(CFLAGS) histogram.cpp
 image.o: image.h image.cpp
 	g++ -c $(CFLAGS) image.cpp
+
+
+clean:
+	rm -f *.o HistogramSpecification HistogramEqualization ImageQuantization ImageSampling

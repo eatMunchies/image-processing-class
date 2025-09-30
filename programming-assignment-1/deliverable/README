@@ -11,6 +11,7 @@ To run the code, simply try running the executable for that problem.
 
 If your build environment is different than mine, you will have to remake the executables. 
 - make sure you have 'make' installed and you can compile cpp code
+- run 'make clean' in the project directory to remove any lingering executable or object files
 - run 'make' in the project directory to build the executables
 - run the executables!
 
