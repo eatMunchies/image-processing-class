@@ -99,8 +99,8 @@ int main(int argc, char *argv[]) {
     testTransformedHistogram.convertToImage(256, 256, testTransformedFrequencies);
     
     // write test
-    writeImage("../photos/base/testHistogram.pgm", testFrequencies);
-    writeImage("../photos/transformed/equalization/testTransformedHistogram.pgm", testTransformedFrequencies);
+    writeImage("./testHistogram.pgm", testFrequencies);
+    writeImage("./testTransformedHistogram.pgm", testTransformedFrequencies);
     writeImage(testEnd, test);
 
     // boat image
@@ -124,8 +124,8 @@ int main(int argc, char *argv[]) {
     boatTransformedHistogram.convertToImage(256, 256, boatTransformedHistogramImage);
 
     // write
-    writeImage("../photos/base/boatHistogram.pgm", boatHistogramImage);
-    writeImage("../photos/transformed/equalization/boatTransformedHistogram.pgm", boatTransformedHistogramImage);
+    writeImage("./boatHistogram.pgm", boatHistogramImage);
+    writeImage("./boatTransformedHistogram.pgm", boatTransformedHistogramImage);
     writeImage(boatEnd, boat);
 
     // f16 
@@ -147,8 +147,8 @@ int main(int argc, char *argv[]) {
     f16TransformedHistogram.convertToImage(256, 256, f16TransformedHistogramImage);
 
     // write
-    writeImage("../photos/base/f16Histogram.pgm", f16HistogramImage);
-    writeImage("../photos/transformed/equalization/f16TransformedHistogram.pgm", f16TransformedHistogramImage);
+    writeImage("./f16Histogram.pgm", f16HistogramImage);
+    writeImage("./f16TransformedHistogram.pgm", f16TransformedHistogramImage);
     writeImage(f16End, f16);
 
     return 0;
