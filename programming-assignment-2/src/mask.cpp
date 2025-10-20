@@ -20,13 +20,47 @@ Mask::Mask(char* type, int maskSizeParam) {
         }
     }
     if (strcmp(type, "gaussian") == 0) {
-        if (maskSizeParam == 7) loadGaussianFromFile("./gaussian7.txt");
-        if (maskSizeParam == 15) loadGaussianFromFile("./gaussian15.txt");
+        if (maskSizeParam == 7) loadFromFile("./gaussian7.txt");
+        if (maskSizeParam == 15) loadFromFile("./gaussian15.txt");
     }
     normalizeMask();
 }
 
-void Mask::loadGaussianFromFile(char* filename) {
+
+Mask::Mask(char* filepath) {
+    // get mask size
+    std::ifstream file(filepath);
+    
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << filepath << std::endl;
+        return;
+    }
+    
+    std::string firstLine;
+    std::getline(file, firstLine);
+    std::istringstream iss(firstLine);
+    float value;
+    int colCount = 0;
+    
+    while (iss >> value) {
+        colCount++;
+    }
+    
+    maskSize = colCount; 
+    file.close();
+    
+    // allocate mask array
+    mask = new float*[maskSize];
+    for (int i = 0; i < maskSize; i++) {
+        mask[i] = new float[maskSize];
+    }
+    
+    loadFromFile(filepath);
+    
+    normalizeMask();
+}
+
+void Mask::loadFromFile(char* filename) {
     std::ifstream file(filename);
     
     if (!file.is_open()) {

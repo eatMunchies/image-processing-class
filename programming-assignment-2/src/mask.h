@@ -16,7 +16,7 @@ class Mask {
     private:
         float** mask; 
         int maskSize;
-        void loadGaussianFromFile(char*);
+        void loadFromFile(char*);
         void normalizeMask();
 };
 
