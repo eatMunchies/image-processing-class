@@ -12,8 +12,8 @@ void CorrelationHelper::correlation(float** output, ImageType& image, ImageType&
     // x is col
     // y is row
     
-    cout << "correlating at x, y: " << x << ", " << y << endl;
-    cout << "N, M, Nm, Mm : " << N << ", " << M << ", " << Nm << ", " << Mm << endl;
+    // cout << "correlating at x, y: " << x << ", " << y << endl;
+    // cout << "N, M, Nm, Mm : " << N << ", " << M << ", " << Nm << ", " << Mm << endl;
 
     // calculate one mask
     float val = 0;
@@ -68,7 +68,7 @@ void CorrelationHelper::correlation(float** output, ImageType& image, ImageType&
         }
     } 
 
-    cout << "calculated mask val: " << val << endl;
+    // cout << "calculated mask val: " << val << endl;
 
     // set output
     output[y][x] = val;
@@ -81,7 +81,7 @@ void CorrelationHelper::correlateImage(float** output, ImageType& image, ImageTy
     int Nm, Mm, Qm;
     mask.getImageInfo(Nm, Mm, Qm);
 
-    cout << "got image info for correlate image" << endl;
+    // cout << "got image info for correlate image" << endl;
 
     // loop over dimensions
     for (int i = 0; i < N; i++) { // N is rows, i is row = y

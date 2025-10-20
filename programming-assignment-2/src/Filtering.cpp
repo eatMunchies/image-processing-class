@@ -86,6 +86,13 @@ void medianFiltering(ImageType& input, ImageType& output, int window) {
 }
 
 int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        cerr << "Usage: " << argv[0] << " <mask_size>" << endl;
+        return 1;
+    }
+    
+    int maskSize = atoi(argv[1]);
+    
     // filepaths
     char* lennaFilePath = "./lenna.pgm";
     char* boatFilePath = "./boat.pgm";
@@ -111,52 +118,35 @@ int main(int argc, char *argv[]) {
     cout << "lenna sp" << endl;
 
     // apply filtering
-    ImageType lennaF7SP30(N, M, Q);
-    ImageType lennaF7SP50(N, M, Q);
-    ImageType lennaF15SP30(N, M, Q);
-    ImageType lennaF15SP50(N, M, Q);
-    medianFiltering(lennaSP30, lennaF7SP30, 7);
-    medianFiltering(lennaSP30, lennaF15SP30, 15);
-    medianFiltering(lennaSP50, lennaF7SP50, 7);
-    medianFiltering(lennaSP50, lennaF15SP50, 15);
+    ImageType lennaFSP30(N, M, Q);
+    ImageType lennaFSP50(N, M, Q);
+    medianFiltering(lennaSP30, lennaFSP30, maskSize);
+    medianFiltering(lennaSP50, lennaFSP50, maskSize);
 
     cout << "lenna filtering" << endl;
 
     // apply averaging
-    ImageType lennaA7SP30(N, M, Q);
-    ImageType lennaA7SP50(N, M, Q);
-    ImageType lennaA15SP30(N, M, Q);
-    ImageType lennaA15SP50(N, M, Q);
-    Mask average7("average", 7);
-    Mask average15("average", 15);
-    average7.applyMask(lennaSP30, lennaA7SP30, correlator);
-    average7.applyMask(lennaSP50, lennaA7SP50, correlator);
-    average15.applyMask(lennaSP30, lennaA15SP30, correlator);
-    average15.applyMask(lennaSP50, lennaA15SP50, correlator);
+    ImageType lennaASP30(N, M, Q);
+    ImageType lennaASP50(N, M, Q);
+    Mask averageMask("average", maskSize);
+    averageMask.applyMask(lennaSP30, lennaASP30, correlator);
+    averageMask.applyMask(lennaSP50, lennaASP50, correlator);
 
     cout << "lenna averaging" << endl;
 
     // write out
     char* lennaSP30Path = "./sp30_lenna.pgm";
     char* lennaSP50Path = "./sp50_lenna.pgm";
-    char* lennaSP30A7Path = "./sp30_a7_lenna.pgm";
-    char* lennaSP30A15Path = "./sp30_a15_lenna.pgm";
-    char* lennaSP30F7Path = "./sp30_f7_lenna.pgm";
-    char* lennaSP30F15Path = "./sp30_f15_lenna.pgm";
-    char* lennaSP50A7Path = "./sp50_a7_lenna.pgm";
-    char* lennaSP50A15Path = "./sp50_a15_lenna.pgm";
-    char* lennaSP50F7Path = "./sp50_f7_lenna.pgm";
-    char* lennaSP50F15Path = "./sp50_f15_lenna.pgm";
+    char* lennaASP30Path = "./sp30_a_lenna.pgm";
+    char* lennaASP50Path = "./sp50_a_lenna.pgm";
+    char* lennaFSP30Path = "./sp30_f_lenna.pgm";
+    char* lennaFSP50Path = "./sp50_f_lenna.pgm";
     writeImage(lennaSP30Path, lennaSP30);
     writeImage(lennaSP50Path, lennaSP50);
-    writeImage(lennaSP30A7Path, lennaA7SP30);
-    writeImage(lennaSP30A15Path, lennaA15SP30);
-    writeImage(lennaSP50A7Path, lennaA7SP50);
-    writeImage(lennaSP50A15Path, lennaA15SP50);
-    writeImage(lennaSP30F7Path, lennaF7SP30);
-    writeImage(lennaSP30F15Path, lennaF15SP30);
-    writeImage(lennaSP50F7Path, lennaF7SP50);
-    writeImage(lennaSP50F15Path, lennaF15SP50);
+    writeImage(lennaASP30Path, lennaASP30);
+    writeImage(lennaASP50Path, lennaASP50);
+    writeImage(lennaFSP30Path, lennaFSP30);
+    writeImage(lennaFSP50Path, lennaFSP50);
 
     cout << "lenna write" << endl;
 
@@ -172,44 +162,28 @@ int main(int argc, char *argv[]) {
     saltPepper(boat, boatSP50, 0.5);
 
     // apply filtering
-    ImageType boatF7SP30(N, M, Q);
-    ImageType boatF7SP50(N, M, Q);
-    ImageType boatF15SP30(N, N, Q);
-    ImageType boatF15SP50(N, M, Q);
-    medianFiltering(boatSP30, boatF7SP30, 7);
-    medianFiltering(boatSP30, boatF15SP30, 15);
-    medianFiltering(boatSP50, boatF7SP50, 7);
-    medianFiltering(boatSP50, boatF15SP50, 15);
+    ImageType boatFSP30(N, M, Q);
+    ImageType boatFSP50(N, M, Q);
+    medianFiltering(boatSP30, boatFSP30, maskSize);
+    medianFiltering(boatSP50, boatFSP50, maskSize);
 
     // apply averaging
-    ImageType boatA7SP30(N, M, Q);
-    ImageType boatA7SP50(N, M, Q);
-    ImageType boatA15SP30(N, N, Q);
-    ImageType boatA15SP50(N, M, Q);
-    average7.applyMask(boatSP30, boatA7SP30, correlator);
-    average7.applyMask(boatSP50, boatA7SP50, correlator);
-    average15.applyMask(boatSP30, boatA15SP30, correlator);
-    average15.applyMask(boatSP50, boatA15SP50, correlator);
+    ImageType boatASP30(N, M, Q);
+    ImageType boatASP50(N, M, Q);
+    averageMask.applyMask(boatSP30, boatASP30, correlator);
+    averageMask.applyMask(boatSP50, boatASP50, correlator);
 
     // write out
     char* boatSP30Path = "./sp30_boat.pgm";
     char* boatSP50Path = "./sp50_boat.pgm";
-    char* boatSP30A7Path = "./sp30_a7_boat.pgm";
-    char* boatSP30A15Path = "./sp30_a15_boat.pgm";
-    char* boatSP30F7Path = "./sp30_f7_boat.pgm";
-    char* boatSP30F15Path = "./sp30_f15_boat.pgm";
-    char* boatSP50A7Path = "./sp50_a7_boat.pgm";
-    char* boatSP50A15Path = "./sp50_a15_boat.pgm";
-    char* boatSP50F7Path = "./sp50_f7_boat.pgm";
-    char* boatSP50F15Path = "./sp50_f15_boat.pgm";
+    char* boatASP30Path = "./sp30_a_boat.pgm";
+    char* boatASP50Path = "./sp50_a_boat.pgm";
+    char* boatFSP30Path = "./sp30_f_boat.pgm";
+    char* boatFSP50Path = "./sp50_f_boat.pgm";
     writeImage(boatSP30Path, boatSP30);
     writeImage(boatSP50Path, boatSP50);
-    writeImage(boatSP30A7Path, boatA7SP30);
-    writeImage(boatSP30A15Path, boatA15SP30);
-    writeImage(boatSP50A7Path, boatA7SP50);
-    writeImage(boatSP50A15Path, boatA15SP50);
-    writeImage(boatSP30F7Path, boatF7SP30);
-    writeImage(boatSP30F15Path, boatF15SP30);
-    writeImage(boatSP50F7Path, boatF7SP50);
-    writeImage(boatSP50F15Path, boatF15SP50);
+    writeImage(boatASP30Path, boatASP30);
+    writeImage(boatASP50Path, boatASP50);
+    writeImage(boatFSP30Path, boatFSP30);
+    writeImage(boatFSP50Path, boatFSP50);
 }

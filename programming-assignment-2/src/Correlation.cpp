@@ -22,9 +22,15 @@ int writeImage(char[], ImageType&);
 
 int main(int argc, char *argv[]) 
 {
+    // arg check
+    if (argc < 2) {
+        cerr << "Usage: " << argv[0] << " <mask_filepath> [image_filepath]" << endl;
+        return 1;
+    }
+
     // filepaths
-    char* imageFilePath = "./Image.pgm";
-    char* maskFilePath = "./Pattern.pgm";
+    char* imageFilePath = (argc > 2) ? const_cast<char*>(argv[2]) : const_cast<char*>("./Image.pgm");
+    char* maskFilePath = (argc > 1) ? const_cast<char*>(argv[1]) : const_cast<char*>("./Pattern.pgm");
 
     // create correlation object
     CorrelationHelper correlator;
