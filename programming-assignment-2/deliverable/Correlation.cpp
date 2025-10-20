@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     readImage(maskFilePath, mask);
     ImageType output(N, M, Q);
     float** rawOutput = new float*[N];
-    for (int i = 0; i < M; i++) {
+    for (int i = 0; i < N; i++) {
         rawOutput[i] = new float[M];
     }
 

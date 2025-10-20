@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
 
     // get masks
     Mask prewittx("./prewittX.txt");
-    Mask prewitty("./prewitty.txt");
+    Mask prewitty("./prewittY.txt");
     Mask sobelx("./sobelX.txt");
     Mask sobely("./sobelY.txt");
     Mask laplacian("./laplacian.txt");
