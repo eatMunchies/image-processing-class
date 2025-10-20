@@ -10,6 +10,11 @@ This project is structured into five executables, one for each problem of the as
 
 To run the code, simply try running the executable for that problem. 
 
+Special Execution Instructions:
+- For running the ./Correlation executable, you need to provide two arguments, <mask_filepath> and [image_filepath], where mask is the link to a pgm image that you want to use as the correlation mask and image_filepath which is the pgm image that you want to run the correlation on. Try using this command once you make the executable: ./Correlation "Pattern.pgm" "Image.pgm"
+- For running the ./Filtering executable, you need to provide the mask size as an argument. 7 and 15 are good mask sizes. For example, try running ./Filtering 7.
+
+
 If your build environment is different than mine, you will have to remake the executables. 
 - make sure you have 'make' installed and you can compile cpp code
 - run 'make clean' in the project directory to remove any lingering executable or object files
