@@ -13,12 +13,32 @@ Apply first and second derivative masks to the source images
 #include "correlationHelper.h"
 #include <cstring>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 int readImageHeader(char[], int&, int&, int&, bool&);
 int readImage(char[], ImageType&);
 int writeImage(char[], ImageType&);
+
+void magnitude(ImageType& dx, ImageType& dy, ImageType& output) {
+    // get the magnitude of the gradient
+    int px;
+    int py;
+    int val;
+
+    // assuming the same dimensions 
+    int N, M, Q;
+    dx.getImageInfo(N, M, Q);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j ++) {
+            dx.getPixelVal(i, j, px);
+            dy.getPixelVal(i, j, py);
+            val = sqrt((px * px) + (py * py));
+            output.setPixelVal(i, j, val);
+        }
+    }
+}
 
 int main(int argc, char* argv[])
 {
@@ -52,11 +72,15 @@ int main(int argc, char* argv[])
     ImageType lennaSX(N, M, Q);
     ImageType lennaSY(N, M, Q);
     ImageType lennaL(N, M, Q);
+    ImageType lennaPM(N, M, Q);
+    ImageType lennaSM(N, M, Q);
     prewittx.applyMask(lenna, lennaPX, correlator);
     prewitty.applyMask(lenna, lennaPY, correlator);
     sobelx.applyMask(lenna, lennaSX, correlator);
     sobely.applyMask(lenna, lennaSY, correlator);
     laplacian.applyMask(lenna, lennaL, correlator);
+    magnitude(lennaPX, lennaPY, lennaPM);
+    magnitude(lennaSX, lennaSY, lennaSM);
 
     cout << "applied masks" << endl;
 
@@ -65,11 +89,15 @@ int main(int argc, char* argv[])
     char* lennaSXPath = "./lenna_sx.pgm";
     char* lennaSYPath = "./lenna_sy.pgm";
     char* lennaLPath = "./lenna_l.pgm";
+    char* lennaPMPath = "./lenna_pm.pgm";
+    char* lennaSMPath = "./lenna_sm.pgm";
     writeImage(lennaPXPath, lennaPX);
     writeImage(lennaPYPath, lennaPY);
     writeImage(lennaSXPath, lennaSX);
     writeImage(lennaSYPath, lennaSY);
     writeImage(lennaLPath, lennaL);
+    writeImage(lennaPMPath, lennaPM);
+    writeImage(lennaSMPath, lennaSM);
 
     cout << "wrote images" << endl;
 
@@ -84,20 +112,28 @@ int main(int argc, char* argv[])
     ImageType sfSX(N, M, Q);
     ImageType sfSY(N, M, Q);
     ImageType sfL(N, M, Q);
+    ImageType sfPM(N, M, Q);
+    ImageType sfSM(N, M, Q);
     prewittx.applyMask(sf, sfPX, correlator);
     prewitty.applyMask(sf, sfPY, correlator);
     sobelx.applyMask(sf, sfSX, correlator);
     sobely.applyMask(sf, sfSY, correlator);
     laplacian.applyMask(sf, sfL, correlator);
+    magnitude(sfPX, sfPY, sfPM);
+    magnitude(sfSX, sfSY, sfSM);
 
     char* sfPXPath = "./sf_px.pgm";
     char* sfPYPath = "./sf_py.pgm";
     char* sfSXPath = "./sf_sx.pgm";
     char* sfSYPath = "./sf_sy.pgm";
     char* sfLPath = "./sf_l.pgm";
+    char* sfPMPath = "./sf_pm.pgm";
+    char* sfSMPath = "./sf_sm.pgm";
     writeImage(sfPXPath, sfPX);
     writeImage(sfPYPath, sfPY);
     writeImage(sfSXPath, sfSX);
     writeImage(sfSYPath, sfSY);
     writeImage(sfLPath, sfL);
+    writeImage(sfPMPath, sfPM);
+    writeImage(sfSMPath, sfSM);
 }
