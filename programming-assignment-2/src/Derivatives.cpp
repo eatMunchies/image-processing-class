@@ -84,10 +84,10 @@ int main(int argc, char* argv[])
 
     cout << "applied masks" << endl;
 
-    char* lennaPXPath = "./lenna_px.pgm";
-    char* lennaPYPath = "./lenna_py.pgm";
-    char* lennaSXPath = "./lenna_sx.pgm";
-    char* lennaSYPath = "./lenna_sy.pgm";
+    char* lennaPXPath = "./lenna_pdy.pgm";
+    char* lennaPYPath = "./lenna_pdx.pgm";
+    char* lennaSXPath = "./lenna_sdy.pgm";
+    char* lennaSYPath = "./lenna_sdx.pgm";
     char* lennaLPath = "./lenna_l.pgm";
     char* lennaPMPath = "./lenna_pm.pgm";
     char* lennaSMPath = "./lenna_sm.pgm";
@@ -122,10 +122,10 @@ int main(int argc, char* argv[])
     magnitude(sfPX, sfPY, sfPM);
     magnitude(sfSX, sfSY, sfSM);
 
-    char* sfPXPath = "./sf_px.pgm";
-    char* sfPYPath = "./sf_py.pgm";
-    char* sfSXPath = "./sf_sx.pgm";
-    char* sfSYPath = "./sf_sy.pgm";
+    char* sfPXPath = "./sf_pdy.pgm";
+    char* sfPYPath = "./sf_pdx.pgm";
+    char* sfSXPath = "./sf_sdy.pgm";
+    char* sfSYPath = "./sf_sdx.pgm";
     char* sfLPath = "./sf_l.pgm";
     char* sfPMPath = "./sf_pm.pgm";
     char* sfSMPath = "./sf_sm.pgm";

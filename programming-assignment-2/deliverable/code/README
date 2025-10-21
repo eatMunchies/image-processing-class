@@ -1,0 +1,26 @@
+
+Welcome to my first programming assignment for CS 474, Image Processing. 
+
+This project is structured into five executables, one for each problem of the assignment:
+1. Correlation
+2. Smoothing
+3. Filtering
+4. Derivatives
+5. ExtraCredit
+
+To run the code, simply try running the executable for that problem. 
+
+Special Execution Instructions:
+- For running the ./Correlation executable, you need to provide two arguments, <mask_filepath> and [image_filepath], where mask is the link to a pgm image that you want to use as the correlation mask and image_filepath which is the pgm image that you want to run the correlation on. Try using this command once you make the executable: ./Correlation "Pattern.pgm" "Image.pgm"
+- For running the ./Filtering executable, you need to provide the mask size as an argument. 7 and 15 are good mask sizes. For example, try running ./Filtering 7.
+
+
+If your build environment is different than mine, you will have to remake the executables. 
+- make sure you have 'make' installed and you can compile cpp code
+- run 'make clean' in the project directory to remove any lingering executable or object files
+- run 'make' in the project directory to build the executables
+- run the executables!
+
+NOTE: there will be errors but you can ignore them! (They are related to char* string stuff that doesn't really matter for this context and I'm not too keen on fixing it currently).
+
+Filepaths throughout the project are either hardcoded or initialized algorithmically. Regardless, it defaults to putting everything in the project directory, but adjust the code as needed for your setup. 
