@@ -10,13 +10,22 @@ Scheme:
 - store magnitude, phase, real, imaginary parts as imagetypes
 */
 
+enum FFTComponent {
+    REAL,
+    IMAGINARY,
+    MAGNITUDE,
+    PHASE
+};
+
 class FT {
     public:
-        ImageType& input;
+        // ImageType input;
         float** real;
         float** imaginary;
         int paddedRows;
         int paddedCols;
+        float** phase;
+        float** magnitude;
 
         FT(ImageType& i);
         FT(float** real, float** imaginary, int rows, int cols);
@@ -24,10 +33,8 @@ class FT {
         void fftHelper(float data[], unsigned long nn, int isign);
         void fft(bool is1D, bool isForward);
         
-        void getMagnitudeSpectrum(ImageType& output);
-        void getPhaseSpectrum(ImageType& output);
-        void get1DMagnitudeGraph(ImageType& output, int row);
-        void get1DPhaseGraph(ImageType& output, int row);
+        void getSpectrum(ImageType& output, FFTComponent component);
+        void get1DGraph(ImageType& output, int row, FFTComponent component);
 
         void fftShift();
 };
