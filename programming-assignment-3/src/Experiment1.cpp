@@ -68,6 +68,7 @@ int main(int argc, char* argv[])
     // compute dft
     FT partAFFT(partA);
     partAFFT.fft(true, true);
+    // no need to shift for visualization here, we can check the math directly
     // plot real, imaginary, magnitude
     int partASize = 16;
     ImageType partAReal(partASize, partAFFT.paddedCols, 255);
