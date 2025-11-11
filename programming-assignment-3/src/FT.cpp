@@ -260,7 +260,7 @@ void FT::getSpectrum(ImageType& output, FFTComponent component) {
                 float mag = sqrt(real[r][c] * real[r][c] + 
                                imaginary[r][c] * imaginary[r][c]);
                 float logMag = log(1.0 + mag);
-                int pixelVal = (int)(255.0 * logMag / log(1.0 + maxMag));
+                int pixelVal = (int)(255.0 * logMag / (log(1.0 + maxMag)));
                 output.setPixelVal(r, c, pixelVal);
             }
         }
