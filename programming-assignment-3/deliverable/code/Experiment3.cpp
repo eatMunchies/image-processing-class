@@ -46,6 +46,9 @@ int main (int argc, char* argv[])
     float** zeroArray = new float*[lennaFT.paddedRows];
     for (int i = 0; i < lennaFT.paddedRows; i++) {
         zeroArray[i] = new float[lennaFT.paddedCols];
+        for (int j = 0; j < lennaFT.paddedCols; j++) {
+            zeroArray[i][j] = 0.0;
+        }
     }
     FT lennaMagnitudeFT(lennaFT.magnitude, zeroArray, lennaFT.paddedRows, lennaFT.paddedCols);
     lennaMagnitudeFT.fft(false, false);
