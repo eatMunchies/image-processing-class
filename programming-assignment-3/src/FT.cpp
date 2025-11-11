@@ -342,7 +342,7 @@ void FT::get1DGraph(ImageType& output, int row, FFTComponent component) {
         dataRange = 1.0;
     }
     
-    float buffer = dataRange * 0.015;  // 10% buffer for min/max values
+    float buffer = dataRange * 0.1;  // 10% buffer for min/max values
     float plotMin = minVal - buffer;
     float plotMax = maxVal + buffer;
     float plotRange = plotMax - plotMin;

@@ -46,40 +46,46 @@ void generateStatistics(FT& ft) {
 
     // see values at expected impulse locations
     cout << "\nValues at index 8:" << endl;
-    cout << "  Real: " << realPart[0][8] << endl;
-    cout << "  Imag: " << imagPart[0][8] << endl;
-    cout << "  Mag: " << sqrt(realPart[0][8]*realPart[0][8] + imagPart[0][8]*imagPart[0][8]) << endl;
+    cout << "  Real: " << realPart[0][56] << endl;
+    cout << "  Imag: " << imagPart[0][56] << endl;
+    cout << "  Mag: " << sqrt(realPart[0][56]*realPart[0][56] + imagPart[0][56]*imagPart[0][56]) << endl;
 
     cout << "\nValues at index 120:" << endl;
-    cout << "  Real: " << realPart[0][120] << endl;
-    cout << "  Imag: " << imagPart[0][120] << endl;
-    cout << "  Mag: " << sqrt(realPart[0][120]*realPart[0][120] + imagPart[0][120]*imagPart[0][120]) << endl;
+    cout << "  Real: " << realPart[0][72] << endl;
+    cout << "  Imag: " << imagPart[0][72] << endl;
+    cout << "  Mag: " << sqrt(realPart[0][72]*realPart[0][72] + imagPart[0][72]*imagPart[0][72]) << endl;
 }
 
 int main(int argc, char* argv[]) 
 {
     // part a
     // f = [2, 3, 4, 4]
-    int f[] = {2, 3, 4, 5};
+    int f[] = {2, 3, 4, 4};
     ImageType partA(1, 4, 255);
     for (int i = 0; i < 4; i++) {
         partA.setPixelVal(0, i, f[i]);
     }
     // compute dft
     FT partAFFT(partA);
+    int partASize = 16;
+    ImageType partAInit(partASize, partAFFT.paddedCols, 255);
+    partAFFT.get1DGraph(partAInit, 0, REAL);
+    writeImage("./Experiment1PartAInitial.pgm", partAInit);
     partAFFT.fft(true, true);
     // no need to shift for visualization here, we can check the math directly
     // plot real, imaginary, magnitude
-    int partASize = 16;
     ImageType partAReal(partASize, partAFFT.paddedCols, 255);
     ImageType partAImaginary(partASize, partAFFT.paddedCols, 255);
     ImageType partAMagnitude(partASize, partAFFT.paddedCols, 255);
+    ImageType partAPhase(partASize, partAFFT.paddedCols, 255);
     partAFFT.get1DGraph(partAReal, 0, REAL);
     partAFFT.get1DGraph(partAImaginary, 0, IMAGINARY);
     partAFFT.get1DGraph(partAMagnitude, 0, MAGNITUDE);
+    partAFFT.get1DGraph(partAPhase, 0, PHASE);
     writeImage("./Experiment1PartAReal.pgm", partAReal);
     writeImage("./Experiment1PartAImaginary.pgm", partAImaginary);
     writeImage("./Experiment1PartAMagnitude.pgm", partAMagnitude);
+    writeImage("./Experiment1PartAPhase.pgm", partAPhase);
     cout << "Real Values: [";
     for (int i = 0; i < 4; i++) {
         cout << partAFFT.real[0][i];
@@ -111,7 +117,7 @@ int main(int argc, char* argv[])
     }
     // compute dft
     FT partBFFT(partB);
-    int partBSize = 256;
+    int partBSize = 128;
     // see wave before anything
     ImageType partBCosineWave(partBSize, partBFFT.paddedCols, 255);
     partBFFT.get1DGraph(partBCosineWave, 0, REAL);
@@ -158,6 +164,7 @@ int main(int argc, char* argv[])
     partCFFT.fft(true, true);
     partCFFT.fftShift(); // shift!
     // plot real, imaginary, magnitude, phase
+    generateStatistics(partCFFT);
 
     ImageType partCReal(partCSize, partCFFT.paddedCols, 255);
     ImageType partCImaginary(partCSize, partCFFT.paddedCols, 255);

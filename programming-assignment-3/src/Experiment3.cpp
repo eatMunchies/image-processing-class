@@ -56,6 +56,9 @@ int main (int argc, char* argv[])
 
     // part b
     // reconstruct from phase
+    ImageType lennaPhase(lennaFT.paddedRows, lennaFT.paddedCols, 255);
+    lennaFT.getSpectrum(lennaPhase, PHASE);
+    writeImage("./Experiment3PartBPhase.pgm", lennaPhase);
     float** cosTheta = new float*[lennaFT.paddedRows];
     float** sinTheta = new float*[lennaFT.paddedRows];
     for (int i = 0; i < lennaFT.paddedRows; i++) {
