@@ -1,0 +1,22 @@
+
+assignment requirements:
+- band reject and notch filter
+- frequency convolution
+- high frequency emphasis filter
+- inverse filtering
+- wiener filtering
+
+Plan:
+- Make a frequency domain class
+    - can do band reject, notch filter
+        - maybe returns the resulted removal (for part b of experiment 1)
+    - works on FT objects
+    - can convolve two FT objects, returning an FT object
+    - high frequency emphasis filter with various parameters on FT object
+    - can do inverse filtering
+    - can do wiener filtering
+- for experiment 4, just add a separate function that can generate gaussian noise on an image
+
+Thoughts:
+- a band reject filter is a multiplication between the frequency and a filter. so need a way to generate filters?
+- add a constructor to FT to create a frequency representation with a given string (band-pass, notch, hfe)
