@@ -27,4 +27,4 @@ image.o: image.h image.cpp
 	g++ -c $(CFLAGS) image.cpp
 
 clean:
-	rm -f *.o Experiment1 Experiment2 Experiment3
+	rm -f *.o Experiment1 Experiment2 Experiment3 Experiment4
