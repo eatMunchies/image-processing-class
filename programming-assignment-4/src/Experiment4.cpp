@@ -52,6 +52,13 @@ int main(int argc, char* argv[])
     blurredLenna.getSpectrum(LennaMotionBlurMag, MAGNITUDE);
     writeImage("./Experiment4_LennaBlur.pgm", LennaMotionBlurMag);
 
+    FT blurredLennaCopy(blurredLenna.real, blurredLenna.imaginary, blurredLenna.paddedRows, blurredLenna.paddedCols);
+    blurredLennaCopy.fftShift();
+    blurredLennaCopy.fft(false, false);
+    ImageType blurredLennaCopyVis(blurredLenna.paddedRows, blurredLenna.paddedCols, 255);
+    blurredLennaCopy.getSpectrum(blurredLennaCopyVis, REAL);
+    writeImage("./Experiment4_LennaBlurVis.pgm", blurredLennaCopyVis);
+
     // add gaussian noise, experimenting with various Gaussian distributions
     FT blurredLenna2(blurredLenna.real, blurredLenna.imaginary, blurredLenna.paddedRows, blurredLenna.paddedCols);
     FT blurredLenna3(blurredLenna.real, blurredLenna.imaginary, blurredLenna.paddedRows, blurredLenna.paddedCols);
@@ -137,18 +144,18 @@ int main(int argc, char* argv[])
     ImageType inverse33Image(inverse11.paddedRows, inverse11.paddedCols, 255);
     ImageType inverse43Image(inverse11.paddedRows, inverse11.paddedCols, 255);
 
-    inverse11.getSpectrum(inverse11Image, MAGNITUDE);
-    inverse21.getSpectrum(inverse21Image, MAGNITUDE);
-    inverse31.getSpectrum(inverse31Image, MAGNITUDE);
-    inverse41.getSpectrum(inverse41Image, MAGNITUDE);
-    inverse12.getSpectrum(inverse12Image, MAGNITUDE);
-    inverse22.getSpectrum(inverse22Image, MAGNITUDE);
-    inverse32.getSpectrum(inverse32Image, MAGNITUDE);
-    inverse42.getSpectrum(inverse42Image, MAGNITUDE);
-    inverse13.getSpectrum(inverse13Image, MAGNITUDE);
-    inverse23.getSpectrum(inverse23Image, MAGNITUDE);
-    inverse33.getSpectrum(inverse33Image, MAGNITUDE);
-    inverse43.getSpectrum(inverse43Image, MAGNITUDE);
+    inverse11.getSpectrum(inverse11Image, REAL);
+    inverse21.getSpectrum(inverse21Image, REAL);
+    inverse31.getSpectrum(inverse31Image, REAL);
+    inverse41.getSpectrum(inverse41Image, REAL);
+    inverse12.getSpectrum(inverse12Image, REAL);
+    inverse22.getSpectrum(inverse22Image, REAL);
+    inverse32.getSpectrum(inverse32Image, REAL);
+    inverse42.getSpectrum(inverse42Image, REAL);
+    inverse13.getSpectrum(inverse13Image, REAL);
+    inverse23.getSpectrum(inverse23Image, REAL);
+    inverse33.getSpectrum(inverse33Image, REAL);
+    inverse43.getSpectrum(inverse43Image, REAL);
 
     writeImage("./Experiment4_Inverse11.pgm", inverse11Image);
     writeImage("./Experiment4_Inverse21.pgm", inverse21Image);
@@ -229,18 +236,18 @@ int main(int argc, char* argv[])
     ImageType weiner33Image(weiner11.paddedRows, weiner11.paddedCols, 255);
     ImageType weiner43Image(weiner11.paddedRows, weiner11.paddedCols, 255);
 
-    weiner11.getSpectrum(weiner11Image, MAGNITUDE);
-    weiner21.getSpectrum(weiner21Image, MAGNITUDE);
-    weiner31.getSpectrum(weiner31Image, MAGNITUDE);
-    weiner41.getSpectrum(weiner41Image, MAGNITUDE);
-    weiner12.getSpectrum(weiner12Image, MAGNITUDE);
-    weiner22.getSpectrum(weiner22Image, MAGNITUDE);
-    weiner32.getSpectrum(weiner32Image, MAGNITUDE);
-    weiner42.getSpectrum(weiner42Image, MAGNITUDE);
-    weiner13.getSpectrum(weiner13Image, MAGNITUDE);
-    weiner23.getSpectrum(weiner23Image, MAGNITUDE);
-    weiner33.getSpectrum(weiner33Image, MAGNITUDE);
-    weiner43.getSpectrum(weiner43Image, MAGNITUDE);
+    weiner11.getSpectrum(weiner11Image, REAL);
+    weiner21.getSpectrum(weiner21Image, REAL);
+    weiner31.getSpectrum(weiner31Image, REAL);
+    weiner41.getSpectrum(weiner41Image, REAL);
+    weiner12.getSpectrum(weiner12Image, REAL);
+    weiner22.getSpectrum(weiner22Image, REAL);
+    weiner32.getSpectrum(weiner32Image, REAL);
+    weiner42.getSpectrum(weiner42Image, REAL);
+    weiner13.getSpectrum(weiner13Image, REAL);
+    weiner23.getSpectrum(weiner23Image, REAL);
+    weiner33.getSpectrum(weiner33Image, REAL);
+    weiner43.getSpectrum(weiner43Image, REAL);
 
     writeImage("./Experiment4_Weiner11.pgm", weiner11Image);
     writeImage("./Experiment4_Weiner21.pgm", weiner21Image);
@@ -265,9 +272,9 @@ int main(int argc, char* argv[])
     ImageType blurredLennaMag(blurredLenna.paddedRows, blurredLenna.paddedCols, 255);
     ImageType blurredLennaMag2(blurredLenna.paddedRows, blurredLenna.paddedCols, 255);
     ImageType blurredLennaMag3(blurredLenna.paddedRows, blurredLenna.paddedCols, 255);
-    blurredLenna.getSpectrum(blurredLennaMag, MAGNITUDE);
-    blurredLenna2.getSpectrum(blurredLennaMag2, MAGNITUDE);
-    blurredLenna3.getSpectrum(blurredLennaMag3, MAGNITUDE);
+    blurredLenna.getSpectrum(blurredLennaMag, REAL);
+    blurredLenna2.getSpectrum(blurredLennaMag2, REAL);
+    blurredLenna3.getSpectrum(blurredLennaMag3, REAL);
     writeImage("./Experiment4_BlurredLenna1.pgm", blurredLennaMag);
     writeImage("./Experiment4_BlurredLenna2.pgm", blurredLennaMag2);
     writeImage("./Experiment4_BlurredLenna3.pgm", blurredLennaMag3);
